@@ -2,15 +2,14 @@
 
 int		main(int ac, char **av)
 {
+	t_env	env;
+
 	(void)ac;
 	(void)av;
-
-	t_env	env;
-	if(!ft_init(&env))
+	if (!ft_init(&env))
 		return (0);
+	mlx_expose_hook(env.win, draw, &env);
+	mlx_key_hook(env.win, key, &env);
 	mlx_loop(env.mlx);
-
 	return (0);
 }
-
-

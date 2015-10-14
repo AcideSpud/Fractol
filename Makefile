@@ -6,7 +6,9 @@ NAME = fractol
 SRC_NAME = main.c\
 		   init.c\
 		   event.c\
+		   img.c\
 		   error.c\
+		   draw.c\
 
 SRC_PATH = ./src/
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
