@@ -9,6 +9,7 @@ SRC_NAME = main.c\
 		   img.c\
 		   error.c\
 		   draw.c\
+		   cantor.c\
 
 SRC_PATH = ./src/
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
