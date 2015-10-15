@@ -34,6 +34,16 @@ typedef struct		s_env
 	t_color			*color;
 }					t_env;
 
+typedef struct		s_lim
+{
+	int				x_max;
+	int				x_min;
+	int				y_min;
+	int				y_max;
+	int				it_max;
+	int				zoom;
+}					t_lim;
+
 typedef struct		s_vertex
 {
 	float			x;
@@ -41,8 +51,8 @@ typedef struct		s_vertex
 	float			z;
 }					t_vertex;
 
-
-int					ft_init(t_env *env);
+int					ft_init(t_env *env, char *arg);
+int					init_cantor(t_env *env);
 int					key(int key, t_env *env);
 int					draw(t_env *env);
 void				error(char *str);
