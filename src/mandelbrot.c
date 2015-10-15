@@ -34,8 +34,8 @@ static void		mandel_algo(t_env *env, t_lim *lim)
 		yy = 0;
 		while (yy < lim->img_y)
 		{
-			lim->c_r = xx / lim->zoom + lim->v1->x;
-			lim->c_i = yy / lim->zoom + lim->v1->y;
+			lim->c_r = xx / env->zoom + lim->v1->x;
+			lim->c_i = yy / env->zoom + lim->v1->y;
 			lim->z_r = 0;
 			lim->z_i = 0;
 			lim->i = 0;
@@ -52,13 +52,12 @@ void			mandelbrot(t_env *env)
 
 	lim.v1 = (t_vertex*)malloc(sizeof(t_vertex));
 	lim.v2 = (t_vertex*)malloc(sizeof(t_vertex));
-	lim.zoom = 210;
 	lim.v1->x = -2.1;
 	lim.v1->y = -1.2;
 	lim.v2->x = 0.6;
 	lim.v2->y = 1.2;
-	lim.img_x = (lim.v2->x - lim.v1->x) * lim.zoom;
-	lim.img_y = (lim.v2->y - lim.v1->x) * lim.zoom;
+	lim.img_x = (lim.v2->x - lim.v1->x) * env->zoom;
+	lim.img_y = (lim.v2->y - lim.v1->x) * env->zoom;
 	lim.it_max = 50;
 	mandel_algo(env, &lim);
 }

@@ -32,6 +32,7 @@ typedef struct		s_env
 	int				iendian;
 	t_color			*color;
 	int				select;
+	float			zoom;
 }					t_env;
 
 typedef struct		s_vertex
@@ -48,7 +49,6 @@ typedef struct		s_lim
 	float			z_r;
 	float			z_i;
 	float			i;
-	float			zoom;
 	float			tmp;
 	t_vertex		*v1;
 	t_vertex		*v2;
@@ -59,6 +59,7 @@ typedef struct		s_lim
 
 int					init(t_env *env, char *arg);
 int					key(int key, t_env *env);
+int					mouse_hook(int button, int x, int y, t_env *env);
 int					draw(t_env *env);
 void				error(char *str);
 void				fill_img(t_env *env, int color);

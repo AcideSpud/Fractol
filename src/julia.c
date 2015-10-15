@@ -35,8 +35,8 @@ static	void	julia_algo(t_env *env, t_lim *lim)
 		{
 			lim->c_r = 0.285;
 			lim->c_i = 0.01;
-			lim->z_r = xx / lim->zoom + lim->v1->x;
-			lim->z_i = yy / lim->zoom + lim->v1->y;
+			lim->z_r = xx / env->zoom + lim->v1->x;
+			lim->z_i = yy / env->zoom + lim->v1->y;
 			lim->i = 0;
 			julia_algo2(env, lim, xx, yy);
 			yy++;
@@ -51,13 +51,12 @@ void			julia(t_env *env)
 
 	lim.v1 = (t_vertex*)malloc(sizeof(t_vertex));
 	lim.v2 = (t_vertex*)malloc(sizeof(t_vertex));
-	lim.zoom = 200;
 	lim.v1->x = -1;
 	lim.v1->y = -1.2;
 	lim.v2->x = 1;
 	lim.v2->y = 1.2;
-	lim.img_x = (lim.v2->x - lim.v1->x) * lim.zoom;
-	lim.img_y = (lim.v2->y - lim.v1->x) * lim.zoom;
+	lim.img_x = (lim.v2->x - lim.v1->x) * env->zoom;
+	lim.img_y = (lim.v2->y - lim.v1->x) * env->zoom;
 	lim.it_max = 150;
 	julia_algo(env, &lim);
 }
