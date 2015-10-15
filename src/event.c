@@ -3,7 +3,10 @@
 int		draw(t_env *env)
 {
 	fill_img(env, 0);
-	cantor(env, 10, 20, env->width - 20);
+//	cantor(env, 10, 20, env->width - 20);
+	circle_fractal(env, 300, 300, 300.0);
+//	mandelbrot(env);
+//	julia(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (0);
 }

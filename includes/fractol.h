@@ -6,11 +6,19 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
+# include <time.h>
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
 # define ESCP 65307
+
+typedef struct		s_color
+{
+	int				r;
+	int				g;
+	int				b;
+}					t_color;
 
 typedef struct		s_env
 {
@@ -23,6 +31,7 @@ typedef struct		s_env
 	int				ibits;
 	int				isizeline;
 	int				iendian;
+	t_color			*color;
 }					t_env;
 
 typedef struct		s_vertex
@@ -31,6 +40,7 @@ typedef struct		s_vertex
 	float			y;
 	float			z;
 }					t_vertex;
+
 
 int					ft_init(t_env *env);
 int					key(int key, t_env *env);
@@ -42,5 +52,13 @@ void				img_put_hline(t_env *env, t_vertex *v1, t_vertex *v2, int color);
 void				img_put_vline(t_env *env, t_vertex *v1, t_vertex *v2, int color);
 void				img_put_line(t_env *env, t_vertex *v1, t_vertex *v2, int color);
 void				cantor(t_env *env, float x, float y, float len);
+void				draw_ellipse(t_env *env, float cx, float cy, float radius);
+void				circle_fractal(t_env *env, float cx, float cy, float r);
+void				mandelbrot(t_env *env);
+void				julia(t_env *env);
+void				callmandel(t_env *env);
+int					color_in_int(t_color *color);
+void				modif_color(t_color *color);
+void				choose_color(t_color *color, int r, int g, int b);
 
 #endif
