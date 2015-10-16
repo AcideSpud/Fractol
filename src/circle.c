@@ -1,12 +1,12 @@
 #include "fractol.h"
 
-void	draw_ellipse(t_env *env, float cx, float cy, float r)
+static	void		draw_ellipse(t_env *env, float cx, float cy, float r)
 {
-	float angle;
-	float step;
-	int	  x;
+	float	angle;
+	float	step;
+	int		x;
 	int		y;
-	int	  color;
+	int		color;
 
 	modif_color(env->color);
 	color = color_in_int(env->color);
@@ -16,14 +16,14 @@ void	draw_ellipse(t_env *env, float cx, float cy, float r)
 	step = 0.1;
 	while (angle <= 360)
 	{
-		x = cx + r*cos(angle);	
-		y = (cy - 0.5) + r*sin(angle);
+		x = cx + r * cos(angle);
+		y = (cy - 0.5) + r * sin(angle);
 		img_put_pixel(env, x, y, color);
 		angle += step;
-	}	
+	}
 }
 
-void	circle_fractal(t_env *env, float cx, float cy, float r)
+void				circle_fractal(t_env *env, float cx, float cy, float r)
 {
 	draw_ellipse(env, cx, cy, r);
 	if (r > 8)
@@ -34,5 +34,3 @@ void	circle_fractal(t_env *env, float cx, float cy, float r)
 		circle_fractal(env, cx, cy - (r / 2), r / 2);
 	}
 }
-
-

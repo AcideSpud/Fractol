@@ -1,62 +1,63 @@
 #include "Fractol.h"
 
-static int	iteration_max = 50;
-
-void		mandelbrot(t_env *env)
+static void		brot_algo(t_env *env, t_lim *lim, int xx, int yy)
 {
-	float		c_r;
-	float		c_i;
-	float		z_r;
-	float		z_i;
-	float		i;
-	float		tmp;
-	t_vertex	*v1;	
-	t_vertex	*v2;
-	float		img_x;
-	float		img_y;
-	float		zoom;
+	while (((lim->z_r * lim->z_r) + (lim->z_i * lim->z_i)) < 4
+			&& (lim->i < lim->it_max))
+	{
+		lim->tmp = lim->z_r;
+		lim->z_r = lim->z_r * lim->z_r - lim->z_i * lim->z_i + lim->c_r;
+		lim->z_i = 2 * lim->z_i * lim->tmp + lim->c_i;
+		lim->i++;
+	}
+	if (lim->i == lim->it_max)
+	{
+		choose_color(env->color, 0, 0, 0);
+		img_put_pixel(env, xx, yy, color_in_int(env->color));
+	}
+	else
+	{
+		choose_color(env->color, 0, (lim->i * 255 / lim->it_max),
+				(lim->i * 255 / lim->it_max));
+		img_put_pixel(env, xx, yy, color_in_int(env->color));
+	}
+}
 
-	v1 = (t_vertex*)malloc(sizeof(t_vertex));
-	v2 = (t_vertex*)malloc(sizeof(t_vertex));
-	zoom = 210;
-	v1->x = -2.1;
-	v1->y = -1.2;
-	v2->x = 0.6;
-	v2->y = 1.2;
-	img_x = (v2->x - v1->x) * zoom;
-	img_y = (v2->y - v1->x) * zoom;
+static void		mandel_algo(t_env *env, t_lim *lim)
+{
+	int		xx;
+	int		yy;
 
-	int xx = 0;
-	int yy;
-	while (xx < img_x)
+	xx = 0;
+	while (xx < lim->img_x)
 	{
 		yy = 0;
-		while (yy < img_y)
+		while (yy < lim->img_y)
 		{
-			c_r = xx / zoom + v1->x;
-			c_i = yy / zoom + v1->y;
-			z_r = 0;
-			z_i = 0;
-			i = 0;
-			while (((z_r * z_r) + (z_i * z_i)) < 4 && (i < iteration_max))
-			{
-				tmp = z_r;
-				z_r = z_r * z_r - z_i * z_i + c_r;
-				z_i = 2 * z_i * tmp + c_i;
-				i++;
-			}
-			if (i == iteration_max)
-			{
-				choose_color(env->color, 0, 0 ,0);
-				img_put_pixel(env, xx, yy, color_in_int(env->color));
-			}
-			else
-			{
-				choose_color(env->color, 0, (i*255/iteration_max) ,(i *255 / iteration_max));
-				img_put_pixel(env, xx, yy,color_in_int(env->color));
-			}
+			lim->c_r = xx / env->zoom + lim->v1->x;
+			lim->c_i = yy / env->zoom + lim->v1->y;
+			lim->z_r = 0;
+			lim->z_i = 0;
+			lim->i = 0;
+			brot_algo(env, lim, xx, yy);
 			yy++;
 		}
-		xx++;		
+		xx++;
 	}
+}
+
+void			mandelbrot(t_env *env)
+{
+	t_lim	lim;
+
+	lim.v1 = (t_vertex*)malloc(sizeof(t_vertex));
+	lim.v2 = (t_vertex*)malloc(sizeof(t_vertex));
+	lim.v1->x = -2.1;
+	lim.v1->y = -1.2;
+	lim.v2->x = 0.6;
+	lim.v2->y = 1.2;
+	lim.img_x = (lim.v2->x - lim.v1->x) * env->zoom;
+	lim.img_y = (lim.v2->y - lim.v1->x) * env->zoom;
+	lim.it_max = 50;
+	mandel_algo(env, &lim);
 }

@@ -1,29 +1,34 @@
 #include "fractol.h"
-/*
-static	void		init_lim(t_lim *lim)
+
+static	void	choose_input(void)
 {
-	lim->x_max = 0.6;
-	lim->x_min = -2.1;
-	lim->y_min = -1.2;
-	lim->y_max = 1.2;
-	lim->it_max = 50;
-	lim->zoom = 100;
+	ft_putstr("__INPUT__ :\n");
+	ft_putstr("1 - cantor\n");
+	ft_putstr("2 - circle\n");
+	ft_putstr("3 - mandelbrot\n");
+	ft_putstr("4 - julia\n");
 }
 
-static	int			init_mandel(t_env *env)
+static	void	input_f(t_env *env, char *arg)
 {
-	t_lim	lim;
-	env->mlx = mlx_init();
-	if (!env->mlx)
-		return (0);
-	init_lim(&lim);
-	env->height = (lim.x_max - lim.x_min) * lim.zoom;
-	env->width = (lim.y_max - lim.y_min) * lim.zoom
-	return (0);
+	if (ft_strcmp(arg, "1") == 0)
+		env->select = 1;
+	else if (ft_strcmp(arg, "2") == 0)
+		env->select = 2;
+	else if (ft_strcmp(arg, "3") == 0)
+		env->select = 3;
+	else if (ft_strcmp(arg, "4") == 0)
+		env->select = 4;
+	else
+	{
+		choose_input();
+		error("bad input !!!");
+	}
 }
-*/
-int			init_cantor(t_env * env)
+
+int				init(t_env *env, char *arg)
 {
+	input_f(env, arg);
 	env->mlx = mlx_init();
 	if (!env->mlx)
 		return (0);
@@ -33,20 +38,11 @@ int			init_cantor(t_env * env)
 	env->color->r = 200;
 	env->color->g = 100;
 	env->color->b = 50;
+	env->zoom = 220;
 	env->win = mlx_new_window(env->mlx, env->width, env->height, "fractol");
 	env->img = mlx_new_image(env->mlx, env->width, env->height);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),
 			&(env->iendian));
+	draw(env);
 	return (1);
 }
-/*
-int			ft_init(t_env *env, char *arg)
-{
-	if (ft_strcmp(arg, "cantor") == 0)
-		init_cantor(env);
-	else if (ft_strcmp(arg, "mandelbrot") == 0)
-		init_mandel(env);
-	else
-		return (0);
-	return (1);
-}*/
