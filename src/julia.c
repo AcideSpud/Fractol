@@ -18,7 +18,7 @@ void		julia(t_env *env)
 
 	v1 = (t_vertex*)malloc(sizeof(t_vertex));
 	v2 = (t_vertex*)malloc(sizeof(t_vertex));
-	zoom = 200;
+	zoom = 500;
 	v1->x = -1;
 	v1->y = -1.2;
 	v2->x = 1;
