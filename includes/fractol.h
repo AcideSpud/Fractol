@@ -32,6 +32,7 @@ typedef struct		s_env
 	int				iendian;
 	t_color			*color;
 	int				select;
+	float			x;
 	float			zoom;
 }					t_env;
 

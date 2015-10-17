@@ -23,6 +23,12 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 		env->zoom += 20;
 		draw(env);
 	}
+	if (button == 7)
+	{
+		env->zoom -= 20;
+		draw(env);
+	}
+	printf("button = %d \n", button);
 	printf("%d || x :  %d  || y :%d || zoom : %f ||\n", button, x, y, env->zoom);
 	return (0);
 }

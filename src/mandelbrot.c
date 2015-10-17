@@ -57,7 +57,7 @@ void			mandelbrot(t_env *env)
 	lim.v2->x = 0.6;
 	lim.v2->y = 1.2;
 	lim.img_x = (lim.v2->x - lim.v1->x) * env->zoom;
-	lim.img_y = (lim.v2->y - lim.v1->x) * env->zoom;
+	lim.img_y = (lim.v2->y - lim.v1->y) * env->zoom;
 	lim.it_max = 50;
 	mandel_algo(env, &lim);
 }
