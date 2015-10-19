@@ -4,12 +4,13 @@ int		draw(t_env *env)
 {
 	printf("|||||%f/////\n", env->zoom);
 	fill_img(env, 0);
+	printf("test\n");
 	if (env->select == 1)
 		cantor(env, 10, 20, env->width - 20);
 	else if (env->select == 2)
 		circle_fractal(env, 300, 300, 300.0);
 	else if (env->select == 3)
-		mandelbrot(env);
+		mandel_algo(env);
 	else if (env->select == 4)
 		julia(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
@@ -31,6 +32,8 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 	}
 	if (button == 1)
 	{
+		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
+		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
 		zoom(env, x, y);
 		draw(env);
 	}

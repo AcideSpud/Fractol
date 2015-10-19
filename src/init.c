@@ -49,14 +49,15 @@ int				init(t_env *env, char *arg)
 	init_julia(env);
 	env->curr_pos->x = 0;
 	env->curr_pos->y = 0;
-	env->height = 600;
-	env->width = 720;
+	env->height = 700;
+	env->width = 825;
 	env->color->r = 200;
 	env->color->g = 100;
 	env->color->b = 50;
-	env->zoom = 100;
-	env->win = mlx_new_window(env->mlx, env->width, env->height, "fractol");
-	env->img = mlx_new_image(env->mlx, env->width, env->height);
+	env->zoom = 300;
+	mandelbrot(env);
+	env->win = mlx_new_window(env->mlx, env->lim->img_x, env->lim->img_y, "fractol");
+	env->img = mlx_new_image(env->mlx, env->lim->img_x, env->lim->img_y);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),
 			&(env->iendian));
 	draw(env);

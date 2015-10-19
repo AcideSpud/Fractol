@@ -38,8 +38,8 @@ static	void	julia_algo(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = 0.285;
-			env->lim->c_i = 0.01;
+			env->lim->c_r = env->curr_pos->x;
+			env->lim->c_i = env->curr_pos->y;
 			env->lim->z_r = xx / zoom_x + env->lim->v1->x;
 			env->lim->z_i = yy / zoom_y + env->lim->v1->y;
 			env->lim->i = 0;
@@ -52,7 +52,7 @@ static	void	julia_algo(t_env *env)
 
 void			julia(t_env *env)
 {
-	env->lim->img_x = env->width;
-	env->lim->img_y = env->height;
+	env->lim->img_x = (env->lim->v2->x - env->lim->v1->x) * env->zoom;
+	env->lim->img_y = (env->lim->v2->y - env->lim->v1->y) * env->zoom;
 	julia_algo(env);
 }

@@ -60,6 +60,7 @@ typedef struct		s_env
 	float			zoom;
 }					t_env;
 
+void				mandel_algo(t_env* env);
 int					init(t_env *env, char *arg);
 int					free_env(t_env *env);
 int					key(int key, t_env *env);
