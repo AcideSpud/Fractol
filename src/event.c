@@ -21,6 +21,7 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 	if (button == 6)
 	{
 		env->zoom += 20;
+		
 		draw(env);
 	}
 	if (button == 7)
@@ -28,7 +29,13 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 		env->zoom -= 20;
 		draw(env);
 	}
-	printf("button = %d \n", button);
+	if (button == 1)
+	{
+		zoom(env, x, y);
+		draw(env);
+	}
+//	printf("button = %d \n", button);
+//	printf("curr_pos x = %f cur_pos y  = %f \n", env->curr_pos->x, env->curr_pos->y);
 	printf("%d || x :  %d  || y :%d || zoom : %f ||\n", button, x, y, env->zoom);
 	return (0);
 }
@@ -36,7 +43,7 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 int		key(int key, t_env *env)
 {
 	if (key == 53)
-		error("User exit");
+		error(env,"User exit");
 	else if (key == 78)
 	{
 		env->zoom = env->zoom + 5;

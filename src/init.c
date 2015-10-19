@@ -22,8 +22,17 @@ static	void	input_f(t_env *env, char *arg)
 	else
 	{
 		choose_input();
-		error("bad input !!!");
+		error(env, "bad input !!!");
 	}
+}
+
+static	void	init_julia(t_env *env)
+{
+	env->lim->v1->x = -1;
+	env->lim->v1->y = -1.2;
+	env->lim->v2->x = 1;
+	env->lim->v2->y = 1.2;
+	env->lim->it_max = 150;
 }
 
 int				init(t_env *env, char *arg)
@@ -33,16 +42,33 @@ int				init(t_env *env, char *arg)
 	if (!env->mlx)
 		return (0);
 	env->color = (t_color*)malloc(sizeof(t_color));
-	env->height = 800;
-	env->width = 600;
+	env->curr_pos = (t_vertex*)malloc(sizeof(t_vertex));
+	env->lim = (t_lim*)malloc(sizeof(t_lim));
+	env->lim->v1 = (t_vertex*)malloc(sizeof(t_lim));
+	env->lim->v2 = (t_vertex*)malloc(sizeof(t_lim));
+	init_julia(env);
+	env->curr_pos->x = 0;
+	env->curr_pos->y = 0;
+	env->height = 600;
+	env->width = 720;
 	env->color->r = 200;
 	env->color->g = 100;
 	env->color->b = 50;
-	env->zoom = 200;
+	env->zoom = 100;
 	env->win = mlx_new_window(env->mlx, env->width, env->height, "fractol");
 	env->img = mlx_new_image(env->mlx, env->width, env->height);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),
 			&(env->iendian));
 	draw(env);
+	return (1);
+}
+
+int				free_env(t_env *env)
+{
+	free(env->color);
+	free(env->curr_pos);
+	free(env->lim->v1);
+	free(env->lim->v2);
+	free(env->lim);
 	return (1);
 }
