@@ -3,7 +3,7 @@
 void	zoom(t_env *env)
 {
 	if (env->select == 3 || env->select == 4 ||
-			env->select == 5)
+			env->select == 5 || env->select == 6)
 	{
 		env->lim->v1->x += env->curr_pos->x;
 		env->lim->v1->y += env->curr_pos->y;
@@ -15,7 +15,8 @@ void	zoom(t_env *env)
 }
 void    dezoom(t_env *env)
 {
-	if (env->select == 3 || env->select == 4)
+	if (env->select == 3 || env->select == 4 ||
+			env->select == 5)
 	{
 		env->lim->v1->x += env->curr_pos->x;
 		env->lim->v1->y += env->curr_pos->y;
@@ -34,6 +35,8 @@ void	reset(t_env *env)
 		init_julia(env);
 	else if (env->select == 5)
 		init_douady(env);
+	else if (env->select == 6)
+		init_burning(env);
 }
 
 void	it_plus(t_env *env)

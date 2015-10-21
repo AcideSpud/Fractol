@@ -1,10 +1,12 @@
 #include "Fractol.h"
 
-static	void	douady_algo2(t_env *env, int xx, int yy)
+static	void	burning_algo2(t_env *env, int xx, int yy)
 {
 	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i)) < 4
 			&& (env->lim->i < env->lim->it_max))
 	{
+		env->lim->z_r = fabs(env->lim->z_r);
+		env->lim->z_i = fabs(env->lim->z_i);
 		env->lim->tmp = env->lim->z_r;
 		env->lim->z_r = env->lim->z_r * env->lim->z_r - env->lim->z_i * env->lim->z_i + env->lim->c_r;
 		env->lim->z_i = 2 * env->lim->z_i * env->lim->tmp + env->lim->c_i;
@@ -23,7 +25,7 @@ static	void	douady_algo2(t_env *env, int xx, int yy)
 	}
 }
 
-void	douady(t_env *env)
+void	burning(t_env *env)
 {
 	int xx;
 	int yy;
@@ -34,12 +36,12 @@ void	douady(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = -0.123;
-			env->lim->c_i = -0.745;
-			env->lim->z_r = xx / env->zoom + env->lim->v1->x;
-			env->lim->z_i = yy / env->zoom + env->lim->v1->y;
+			env->lim->c_r = xx / env->zoom + env->lim->v1->x;
+			env->lim->c_i = yy / env->zoom + env->lim->v1->y;
+			env->lim->z_r = 0;
+			env->lim->z_i = 0;
 			env->lim->i = 0;
-			douady_algo2(env, xx, yy);
+			burning_algo2(env, xx, yy);
 			yy++;
 		}
 		xx++;

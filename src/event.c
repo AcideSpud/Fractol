@@ -15,6 +15,8 @@ int		draw(t_env *env)
 		julia(env);
 	else if (env->select == 5)
 		douady(env);
+	else if (env->select == 6)
+		burning(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (0);
 }

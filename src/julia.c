@@ -12,13 +12,13 @@ static	void	julia_algo2(t_env *env, int xx, int yy)
 	}
 	if (env->lim->i == env->lim->it_max)
 	{
-		choose_color(env->color, (env->lim->i * 255/env->lim->it_max), 0, 0);
+		choose_color(env->color, (env->lim->i * 255 *env->lim->it_max), 0, 0);
 		img_put_pixel(env, xx, yy, color_in_int(env->color));
 	}
 	else
 	{
 		modif_color(env->color);
-		choose_color(env->color, 0, 0, (env->lim->i * 255 / env->lim->it_max));
+		choose_color(env->color, 0, 0, (env->lim->i * 255 * env->lim->it_max));
 		img_put_pixel(env, xx, yy, color_in_int(env->color));
 	}
 }
