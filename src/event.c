@@ -43,13 +43,27 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 	if (button == 2)
 	{
 		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
-		env->curr_pos->x = ((float)y / (float)env->lim->img_y) * 2 - 1;
+		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
 		dezoom(env);
 		draw(env);
 	}
 //	printf("button = %d \n", button);
 //	printf("curr_pos x = %f cur_pos y  = %f \n", env->curr_pos->x, env->curr_pos->y);
 	printf("%d || x :  %d  || y :%d || zoom : %f ||\n", button, x, y, env->zoom);
+	return (0);
+}
+
+int		mouse_move(int x, int y, t_env *env)
+{
+	if (env->select == 4)
+	{
+		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 -1;
+		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
+		if (x % 5 == 0 || y % 5 == 0)
+			draw(env);
+		printf(" x     = %d,    y    = %d\ncurr_pos->x = %f, curr_pos->y = %f \n env->lim->img_x = %f, env->lim->img_y = %f \n",
+				x, y ,env->curr_pos->x, env->curr_pos->y, env->lim->img_x, env->lim->img_y);
+	}
 	return (0);
 }
 

@@ -34,8 +34,8 @@ void	julia(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = 0.285;
-			env->lim->c_i = 0.01;
+			env->lim->c_r = /*0.285*/ env->curr_pos->x;
+			env->lim->c_i = /*0.01*/env->curr_pos->y;
 			env->lim->z_r = xx / env->zoom + env->lim->v1->x;
 			env->lim->z_i = yy / env->zoom + env->lim->v1->y;
 			env->lim->i = 0;

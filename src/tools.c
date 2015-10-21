@@ -9,7 +9,7 @@ void	zoom(t_env *env)
 		env->lim->v1->y += env->curr_pos->y;
 		env->lim->v2->x += env->curr_pos->x;
 		env->lim->v2->y += env->curr_pos->y;
-		env->zoom += 100;
+		env->zoom += 50;
 		env->lim->it_max += 50;
 	}
 }
@@ -21,7 +21,7 @@ void    dezoom(t_env *env)
 		env->lim->v1->y += env->curr_pos->y;
 		env->lim->v2->x += env->curr_pos->x;
 		env->lim->v2->y += env->curr_pos->y;
-		env->zoom -= 100;
+		env->zoom -= 50;
 		env->lim->it_max += 50;
 	}
 }
@@ -32,6 +32,8 @@ void	reset(t_env *env)
 		mandelbrot(env);
 	else if (env->select == 4)
 		init_julia(env);
+	else if (env->select == 5)
+		init_douady(env);
 }
 
 void	it_plus(t_env *env)
