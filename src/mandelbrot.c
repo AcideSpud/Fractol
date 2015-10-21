@@ -27,10 +27,7 @@ void		mandel_algo(t_env *env)
 {
 	int		xx;
 	int		yy;
-//	float	zoom_x;
-//	float	zoom_y;
 	xx = 0;
-	printf("algo\n");
 	while (xx < env->lim->img_x)
 	{
 		yy = 0;
@@ -46,23 +43,4 @@ void		mandel_algo(t_env *env)
 		}
 		xx++;
 	}
-}
-
-void			mandelbrot(t_env *env)
-{
-	env->lim->v1 = (t_vertex*)malloc(sizeof(t_vertex));
-	env->lim->v2 = (t_vertex*)malloc(sizeof(t_vertex));
-	env->lim->v1->x = -2.1;
-	env->lim->v1->y = -1.2;
-	env->lim->v2->x = 0.6;
-	env->lim->v2->y = 1.2;
-//	env->lim->img_x = (env->lim->v2->x - env->lim->v1->x) * env->zoom;
-//	env->lim->img_y = env->height;
-	env->lim->img_x = (env->lim->v2->x - env->lim->v1->x) * env->zoom;
-	env->lim->img_y = (env->lim->v2->y - env->lim->v1->y) * env->zoom;
-//	env->zoom = env->lim->img_x /(env->lim->v2->x - env->lim->v1->x);
-//	env->zoom = env->lim->img_y /(env->lim->v2->y - env->lim->v1->y);
-	env->lim->it_max = 50;
-//	mandel_algo(env);
-	printf("init\n");
 }

@@ -15,6 +15,9 @@ SRC_NAME = main.c\
 		   mandelbrot.c\
 		   julia.c\
 		   tools.c\
+		   destroy.c\
+		   init_julia.c\
+		   init_mandelbrot.c\
 
 SRC_PATH = ./src/
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))

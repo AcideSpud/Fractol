@@ -34,7 +34,15 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 	{
 		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
 		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
-		zoom(env, x, y);
+		printf("(%f ; %f)\n", env->curr_pos->x, env->curr_pos->y);
+		zoom(env);
+		draw(env);
+	}
+	if (button == 2)
+	{
+		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
+		env->curr_pos->x = ((float)y / (float)env->lim->img_y) * 2 - 1;
+		dezoom(env);
 		draw(env);
 	}
 //	printf("button = %d \n", button);
@@ -47,11 +55,20 @@ int		key(int key, t_env *env)
 {
 	if (key == 53)
 		error(env,"User exit");
-	else if (key == 78)
+	if (key == 69)
 	{
-		env->zoom = env->zoom + 5;
-		printf("%f , %d \n", env->zoom, env->select);
-		
+		it_plus(env);
+		draw(env);
+	}
+	if (key == 78)
+	{
+		it_moins(env);
+		draw(env);
+	}
+	if (key == 49)
+	{
+		reset(env);
+		draw(env);
 	}
 	printf("%d\n", key);
 	return (0);

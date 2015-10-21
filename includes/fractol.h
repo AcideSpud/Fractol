@@ -60,6 +60,8 @@ typedef struct		s_env
 	float			zoom;
 }					t_env;
 
+void				it_plus(t_env *env);
+void				it_moins(t_env *env);
 void				mandel_algo(t_env* env);
 int					init(t_env *env, char *arg);
 int					free_env(t_env *env);
@@ -83,6 +85,8 @@ void				callmandel(t_env *env);
 int					color_in_int(t_color *color);
 void				modif_color(t_color *color);
 void				choose_color(t_color *color, int r, int g, int b);
-void				zoom(t_env *env, float x, float y);
-
+void				zoom(t_env *env);
+void				dezoom(t_env *env);
+void				reset(t_env *env);
+void				init_julia(t_env *env);
 #endif

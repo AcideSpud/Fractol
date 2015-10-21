@@ -26,36 +26,39 @@ static	void	input_f(t_env *env, char *arg)
 	}
 }
 
-static	void	init_julia(t_env *env)
+static	void	malloc_env(t_env *env)
 {
-	env->lim->v1->x = -1;
-	env->lim->v1->y = -1.2;
-	env->lim->v2->x = 1;
-	env->lim->v2->y = 1.2;
-	env->lim->it_max = 150;
-}
-
-int				init(t_env *env, char *arg)
-{
-	input_f(env, arg);
 	env->mlx = mlx_init();
 	if (!env->mlx)
-		return (0);
+		error(env, "mlx fail");
 	env->color = (t_color*)malloc(sizeof(t_color));
 	env->curr_pos = (t_vertex*)malloc(sizeof(t_vertex));
 	env->lim = (t_lim*)malloc(sizeof(t_lim));
 	env->lim->v1 = (t_vertex*)malloc(sizeof(t_lim));
 	env->lim->v2 = (t_vertex*)malloc(sizeof(t_lim));
-	init_julia(env);
+}
+
+static	void	env_init(t_env *env)
+{
 	env->curr_pos->x = 0;
 	env->curr_pos->y = 0;
-	env->height = 700;
-	env->width = 825;
+	env->lim->img_y = 800;
+	env->lim->img_x = 600;
 	env->color->r = 200;
 	env->color->g = 100;
 	env->color->b = 50;
-	env->zoom = 300;
-	mandelbrot(env);
+
+}
+
+int				init(t_env *env, char *arg)
+{
+	malloc_env(env);
+	input_f(env, arg);
+	env_init(env);
+	if (env->select == 4)
+		init_julia(env);
+	if (env->select == 3)
+		mandelbrot(env);
 	env->win = mlx_new_window(env->mlx, env->lim->img_x, env->lim->img_y, "fractol");
 	env->img = mlx_new_image(env->mlx, env->lim->img_x, env->lim->img_y);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),
@@ -64,12 +67,3 @@ int				init(t_env *env, char *arg)
 	return (1);
 }
 
-int				free_env(t_env *env)
-{
-	free(env->color);
-	free(env->curr_pos);
-	free(env->lim->v1);
-	free(env->lim->v2);
-	free(env->lim);
-	return (1);
-}

@@ -23,36 +23,25 @@ static	void	julia_algo2(t_env *env, int xx, int yy)
 	}
 }
 
-static	void	julia_algo(t_env *env)
+void	julia(t_env *env)
 {
 	int xx;
 	int yy;
-	float	zoom_x;
-	float	zoom_y;
 
-	zoom_x = env->lim->img_x / (env->lim->v2->x - env->lim->v1->x);
-	zoom_y = env->lim->img_x / (env->lim->v2->y - env->lim->v1->y);
 	xx = 0;
 	while (xx < env->lim->img_x)
 	{
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = env->curr_pos->x;
-			env->lim->c_i = env->curr_pos->y;
-			env->lim->z_r = xx / zoom_x + env->lim->v1->x;
-			env->lim->z_i = yy / zoom_y + env->lim->v1->y;
+			env->lim->c_r = 0.285;
+			env->lim->c_i = 0.01;
+			env->lim->z_r = xx / env->zoom + env->lim->v1->x;
+			env->lim->z_i = yy / env->zoom + env->lim->v1->y;
 			env->lim->i = 0;
 			julia_algo2(env, xx, yy);
 			yy++;
 		}
 		xx++;
 	}
-}
-
-void			julia(t_env *env)
-{
-	env->lim->img_x = (env->lim->v2->x - env->lim->v1->x) * env->zoom;
-	env->lim->img_y = (env->lim->v2->y - env->lim->v1->y) * env->zoom;
-	julia_algo(env);
 }
