@@ -7,6 +7,7 @@ static	void	choose_input(void)
 	ft_putstr("2 - circle\n");
 	ft_putstr("3 - mandelbrot\n");
 	ft_putstr("4 - julia\n");
+	ft_putstr("5 - douady\n");
 }
 
 static	void	input_f(t_env *env, char *arg)
@@ -19,6 +20,8 @@ static	void	input_f(t_env *env, char *arg)
 		env->select = 3;
 	else if (ft_strcmp(arg, "4") == 0)
 		env->select = 4;
+	else if (ft_strcmp(arg, "5") == 0)
+		env->select = 5;
 	else
 	{
 		choose_input();
@@ -57,8 +60,10 @@ int				init(t_env *env, char *arg)
 	env_init(env);
 	if (env->select == 4)
 		init_julia(env);
-	if (env->select == 3)
+	else if (env->select == 3)
 		mandelbrot(env);
+	else if (env->select == 5)
+		init_douady(env);
 	env->win = mlx_new_window(env->mlx, env->lim->img_x, env->lim->img_y, "fractol");
 	env->img = mlx_new_image(env->mlx, env->lim->img_x, env->lim->img_y);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),

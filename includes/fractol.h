@@ -81,6 +81,7 @@ void				cantor(t_env *env, float x, float y, float len);
 void				circle_fractal(t_env *env, float cx, float cy, float r);
 void				mandelbrot(t_env *env);
 void				julia(t_env *env);
+void				douady(t_env *env);
 void				callmandel(t_env *env);
 int					color_in_int(t_color *color);
 void				modif_color(t_color *color);
@@ -89,4 +90,5 @@ void				zoom(t_env *env);
 void				dezoom(t_env *env);
 void				reset(t_env *env);
 void				init_julia(t_env *env);
+void				init_douady(t_env *env);
 #endif

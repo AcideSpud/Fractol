@@ -2,7 +2,8 @@
 
 void	zoom(t_env *env)
 {
-	if (env->select == 3 || env->select == 4)
+	if (env->select == 3 || env->select == 4 ||
+			env->select == 5)
 	{
 		env->lim->v1->x += env->curr_pos->x;
 		env->lim->v1->y += env->curr_pos->y;
