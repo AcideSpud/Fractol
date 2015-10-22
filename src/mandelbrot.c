@@ -35,8 +35,8 @@ void			mandel_algo(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = xx / env->zoom + env->lim->v1->x;
-			env->lim->c_i = yy / env->zoom + env->lim->v1->y;
+			env->lim->c_r = (xx / env->lim->img_x * (0.6 - (-2.1)) + (-2.1));
+			env->lim->c_i = (yy / env->lim->img_y * (1.2 - (1.2)) + (-1.2));
 			env->lim->z_r = 0;
 			env->lim->z_i = 0;
 			env->lim->i = 0;
