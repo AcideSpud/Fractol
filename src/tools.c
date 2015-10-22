@@ -41,5 +41,5 @@ void	it_plus(t_env *env)
 
 void	it_moins(t_env *env)
 {
-	env->lim->it_max -= 10;
+	env->lim->it_max -= 50;
 }

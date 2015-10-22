@@ -64,6 +64,8 @@ int				init(t_env *env, char *arg)
 		mandelbrot(env);
 	else if (env->select == 5)
 		init_douady(env);
+	printf("%f\n", env->lim->img_x);
+	printf("%f\n", env->lim->img_y);
 	env->win = mlx_new_window(env->mlx, env->lim->img_x, env->lim->img_y, "fractol");
 	env->img = mlx_new_image(env->mlx, env->lim->img_x, env->lim->img_y);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),
