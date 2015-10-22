@@ -2,9 +2,7 @@
 
 int		draw(t_env *env)
 {
-	printf("|||||%f/////\n", env->zoom);
 	fill_img(env, 0);
-	printf("test\n");
 	if (env->select == 1)
 		cantor(env, 10, 20, env->width - 20);
 	else if (env->select == 2)
@@ -38,7 +36,6 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 	{
 		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
 		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
-		printf("(%f ; %f)\n", env->curr_pos->x, env->curr_pos->y);
 		zoom(env);
 		draw(env);
 	}
@@ -49,9 +46,6 @@ int		mouse_hook(int	button, int x, int y, t_env *env)
 		dezoom(env);
 		draw(env);
 	}
-//	printf("button = %d \n", button);
-//	printf("curr_pos x = %f cur_pos y  = %f \n", env->curr_pos->x, env->curr_pos->y);
-	printf("%d || x :  %d  || y :%d || zoom : %f ||\n", button, x, y, env->zoom);
 	return (0);
 }
 
@@ -63,9 +57,16 @@ int		mouse_move(int x, int y, t_env *env)
 		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
 		if (x % 5 == 0 || y % 5 == 0)
 			draw(env);
-		printf(" x     = %d,    y    = %d\ncurr_pos->x = %f, curr_pos->y = %f \n env->lim->img_x = %f, env->lim->img_y = %f \n",
-				x, y ,env->curr_pos->x, env->curr_pos->y, env->lim->img_x, env->lim->img_y);
 	}
+	return (0);
+}
+
+int		loop_hook(t_env *env)
+{
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0 );
+	mlx_string_put(env->mlx, env->win, 10, 20, 0xFFFFFF, "Space Bar = Reset");
+	mlx_string_put(env->mlx, env->win, 10, 40, 0xFFFFFF, "+ = iteration++");
+	mlx_string_put(env->mlx, env->win, 10, 60, 0xFFFFFF, "- = iteration--");
 	return (0);
 }
 
@@ -88,6 +89,5 @@ int		key(int key, t_env *env)
 		reset(env);
 		draw(env);
 	}
-	printf("%d\n", key);
 	return (0);
 }

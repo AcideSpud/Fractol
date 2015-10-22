@@ -10,6 +10,7 @@ int		main(int ac, char **av)
 		return (0);
 	mlx_key_hook(env.win, key, &env);
 	mlx_mouse_hook(env.win, mouse_hook, &env);
+	mlx_loop_hook(env.mlx, loop_hook, &env);
 	mlx_expose_hook(env.win, draw, &env);
 	mlx_hook(env.win, 6, PointerMotionMask, mouse_move, &env);
 	mlx_loop(env.mlx);

@@ -34,10 +34,10 @@ static	void	input_f(t_env *env, char *arg)
 
 static	void	malloc_env(t_env *env)
 {
-	env->mlx = mlx_init();
-	if (!env->mlx)
-		error(env, "mlx fail");
-	env->color = (t_color*)malloc(sizeof(t_color));
+	if(!(env->mlx = mlx_init()))
+		error(env, "mlx_init() fail");
+	if(!(env->color = (t_color*)malloc(sizeof(t_color))))
+		error(env, "malloc color failed");
 	env->curr_pos = (t_vertex*)malloc(sizeof(t_vertex));
 	env->lim = (t_lim*)malloc(sizeof(t_lim));
 	env->lim->v1 = (t_vertex*)malloc(sizeof(t_lim));

@@ -68,6 +68,7 @@ int					init(t_env *env, char *arg);
 int					free_env(t_env *env);
 int					key(int key, t_env *env);
 int					mouse_hook(int button, int x, int y, t_env *env);
+int					loop_hook(t_env *env);
 int					mouse_move(int x, int y, t_env *env);
 int					draw(t_env *env);
 void				error(t_env *env, char *str);
