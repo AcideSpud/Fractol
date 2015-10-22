@@ -35,8 +35,8 @@ void			mandel_algo(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = (xx / env->lim->img_x * (0.6 - (-2.1)) + (-2.1));
-			env->lim->c_i = (yy / env->lim->img_y * (1.2 - (1.2)) + (-1.2));
+			env->lim->c_r =  (float)xx / env->lim->img_x * (env->lim->v2->x - env->lim->v1->x) + env->lim->v1->x;
+			env->lim->c_i =  ((float)yy / env->lim->img_y * (env->lim->v2->y - env->lim->v1->y) + env->lim->v1->y);
 			env->lim->z_r = 0;
 			env->lim->z_i = 0;
 			env->lim->i = 0;

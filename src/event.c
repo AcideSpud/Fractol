@@ -33,16 +33,22 @@ int		mouse_hook(int button, int x, int y, t_env *env)
 	}
 	if (button == 1)
 	{
-		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
-		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
-		zoom(env);
+		env->curr_pos->x = ((float)x / (float)env->lim->img_x)
+			* (env->lim->v2->x - env->lim->v1->x) + env->lim->v1->x;
+		env->curr_pos->y = ((float)y / (float)env->lim->img_y)
+			* (env->lim->v2->y - env->lim->v1->y) + env->lim->v1->y;
+		set_scale(env);
+		//zoom(env);
 		draw(env);
 	}
 	if (button == 2)
 	{
-		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
-		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
-		dezoom(env);
+		env->curr_pos->x = ((float)x / (float)env->lim->img_x)
+			* (env->lim->v2->x - env->lim->v1->x) + env->lim->v1->x;
+		env->curr_pos->y = ((float)y / (float)env->lim->img_y)
+			* (env->lim->v2->x - env->lim->v1->x) + env->lim->v1->x;
+		set_discale(env);
+		//dezoom(env);
 		draw(env);
 	}
 	return (0);
