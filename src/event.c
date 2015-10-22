@@ -19,12 +19,11 @@ int		draw(t_env *env)
 	return (0);
 }
 
-int		mouse_hook(int	button, int x, int y, t_env *env)
+int		mouse_hook(int button, int x, int y, t_env *env)
 {
 	if (button == 6)
 	{
 		env->zoom += 20;
-		
 		draw(env);
 	}
 	if (button == 7)
@@ -53,7 +52,7 @@ int		mouse_move(int x, int y, t_env *env)
 {
 	if (env->select == 4)
 	{
-		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 -1;
+		env->curr_pos->x = ((float)x / (float)env->lim->img_x) * 2 - 1;
 		env->curr_pos->y = ((float)y / (float)env->lim->img_y) * 2 - 1;
 		if (x % 5 == 0 || y % 5 == 0)
 			draw(env);
@@ -63,7 +62,7 @@ int		mouse_move(int x, int y, t_env *env)
 
 int		loop_hook(t_env *env)
 {
-	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0 );
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	mlx_string_put(env->mlx, env->win, 10, 20, 0xFFFFFF, "Space Bar = Reset");
 	mlx_string_put(env->mlx, env->win, 10, 40, 0xFFFFFF, "+ = iteration++");
 	mlx_string_put(env->mlx, env->win, 10, 60, 0xFFFFFF, "- = iteration--");
@@ -73,7 +72,7 @@ int		loop_hook(t_env *env)
 int		key(int key, t_env *env)
 {
 	if (key == 53)
-		error(env,"User exit");
+		error(env, "User exit");
 	if (key == 69)
 	{
 		it_plus(env);

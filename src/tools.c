@@ -10,10 +10,11 @@ void	zoom(t_env *env)
 		env->lim->v2->x += env->curr_pos->x;
 		env->lim->v2->y += env->curr_pos->y;
 		env->zoom += 50;
-		env->lim->it_max += 50;
+		env->lim->it_max += 10;
 	}
 }
-void    dezoom(t_env *env)
+
+void	dezoom(t_env *env)
 {
 	if (env->select == 3 || env->select == 4 ||
 			env->select == 5)
@@ -23,7 +24,7 @@ void    dezoom(t_env *env)
 		env->lim->v2->x += env->curr_pos->x;
 		env->lim->v2->y += env->curr_pos->y;
 		env->zoom -= 50;
-		env->lim->it_max += 50;
+		env->lim->it_max += 10;
 	}
 }
 

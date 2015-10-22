@@ -2,11 +2,12 @@
 
 static void		brot_algo(t_env *env, int xx, int yy)
 {
-	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i)) < 4
-			&& (env->lim->i < env->lim->it_max))
+	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i))
+			< 4 && (env->lim->i < env->lim->it_max))
 	{
 		env->lim->tmp = env->lim->z_r;
-		env->lim->z_r = env->lim->z_r * env->lim->z_r - env->lim->z_i * env->lim->z_i + env->lim->c_r;
+		env->lim->z_r = env->lim->z_r * env->lim->z_r
+			- env->lim->z_i * env->lim->z_i + env->lim->c_r;
 		env->lim->z_i = 2 * env->lim->z_i * env->lim->tmp + env->lim->c_i;
 		env->lim->i++;
 	}
@@ -23,18 +24,19 @@ static void		brot_algo(t_env *env, int xx, int yy)
 	}
 }
 
-void		mandel_algo(t_env *env)
+void			mandel_algo(t_env *env)
 {
 	int		xx;
 	int		yy;
+
 	xx = 0;
 	while (xx < env->lim->img_x)
 	{
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r =  xx /env->zoom + env->lim->v1->x;
-			env->lim->c_i =  yy / env->zoom + env->lim->v1->y;
+			env->lim->c_r = xx / env->zoom + env->lim->v1->x;
+			env->lim->c_i = yy / env->zoom + env->lim->v1->y;
 			env->lim->z_r = 0;
 			env->lim->z_i = 0;
 			env->lim->i = 0;
