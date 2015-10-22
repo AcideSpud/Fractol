@@ -8,6 +8,7 @@ static	void	choose_input(void)
 	ft_putstr("3 - mandelbrot\n");
 	ft_putstr("4 - julia\n");
 	ft_putstr("5 - douady\n");
+	ft_putstr("6 - burning\n");
 }
 
 static	void	input_f(t_env *env, char *arg)
@@ -22,6 +23,8 @@ static	void	input_f(t_env *env, char *arg)
 		env->select = 4;
 	else if (ft_strcmp(arg, "5") == 0)
 		env->select = 5;
+	else if (ft_strcmp(arg, "6") == 0)
+		env->select = 6;
 	else
 	{
 		choose_input();
@@ -31,10 +34,10 @@ static	void	input_f(t_env *env, char *arg)
 
 static	void	malloc_env(t_env *env)
 {
-	env->mlx = mlx_init();
-	if (!env->mlx)
-		error(env, "mlx fail");
-	env->color = (t_color*)malloc(sizeof(t_color));
+	if(!(env->mlx = mlx_init()))
+		error(env, "mlx_init() fail");
+	if(!(env->color = (t_color*)malloc(sizeof(t_color))))
+		error(env, "malloc color failed");
 	env->curr_pos = (t_vertex*)malloc(sizeof(t_vertex));
 	env->lim = (t_lim*)malloc(sizeof(t_lim));
 	env->lim->v1 = (t_vertex*)malloc(sizeof(t_lim));
@@ -64,6 +67,8 @@ int				init(t_env *env, char *arg)
 		mandelbrot(env);
 	else if (env->select == 5)
 		init_douady(env);
+	else if (env->select == 6)
+		init_burning(env);
 	printf("%f\n", env->lim->img_x);
 	printf("%f\n", env->lim->img_y);
 	env->win = mlx_new_window(env->mlx, env->lim->img_x, env->lim->img_y, "fractol");
@@ -73,4 +78,3 @@ int				init(t_env *env, char *arg)
 	draw(env);
 	return (1);
 }
-
