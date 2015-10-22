@@ -31,7 +31,7 @@ void	zoom(t_env *env, float scale_x, float scale_y)
 		env->lim->v2->x =  env->curr_pos->x + (scale_x / 4);
 		env->lim->v2->y =  env->curr_pos->y + (scale_y / 4);
 		env->zoom += 50;
-		env->lim->it_max += 50;
+		env->lim->it_max += 10;
 	}
 }
 void    dezoom(t_env *env, float scale_x, float scale_y)

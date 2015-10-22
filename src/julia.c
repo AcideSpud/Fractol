@@ -2,17 +2,18 @@
 
 static	void	julia_algo2(t_env *env, int xx, int yy)
 {
-	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i)) < 4
-			&& (env->lim->i < env->lim->it_max))
+	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i))
+			< 4 && (env->lim->i < env->lim->it_max))
 	{
 		env->lim->tmp = env->lim->z_r;
-		env->lim->z_r = env->lim->z_r * env->lim->z_r - env->lim->z_i * env->lim->z_i + env->lim->c_r;
+		env->lim->z_r = env->lim->z_r * env->lim->z_r
+			- env->lim->z_i * env->lim->z_i + env->lim->c_r;
 		env->lim->z_i = 2 * env->lim->z_i * env->lim->tmp + env->lim->c_i;
 		env->lim->i++;
 	}
 	if (env->lim->i == env->lim->it_max)
 	{
-		choose_color(env->color, (env->lim->i * 255 *env->lim->it_max), 0, 0);
+		choose_color(env->color, (env->lim->i * 255 * env->lim->it_max), 0, 0);
 		img_put_pixel(env, xx, yy, color_in_int(env->color));
 	}
 	else
@@ -23,7 +24,7 @@ static	void	julia_algo2(t_env *env, int xx, int yy)
 	}
 }
 
-void	julia(t_env *env)
+void			julia(t_env *env)
 {
 	int xx;
 	int yy;
@@ -34,8 +35,8 @@ void	julia(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = /*0.285*/ env->curr_pos->x;
-			env->lim->c_i = /*0.01*/env->curr_pos->y;
+			env->lim->c_r = env->curr_pos->x;
+			env->lim->c_i = env->curr_pos->y;
 			env->lim->z_r = (float)xx / env->lim->img_x * (env->lim->v2->x - env->lim->v1->x) + env->lim->v1->x;
 			env->lim->z_i = (float)yy / env->lim->img_y * (env->lim->v2->y - env->lim->v1->y) + env->lim->v1->y;
 			env->lim->i = 0;

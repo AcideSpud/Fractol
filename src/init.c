@@ -34,9 +34,9 @@ static	void	input_f(t_env *env, char *arg)
 
 static	void	malloc_env(t_env *env)
 {
-	if(!(env->mlx = mlx_init()))
+	if ((env->mlx = mlx_init()) == NULL)
 		error(env, "mlx_init() fail");
-	if(!(env->color = (t_color*)malloc(sizeof(t_color))))
+	if (!(env->color = (t_color*)malloc(sizeof(t_color))))
 		error(env, "malloc color failed");
 	env->curr_pos = (t_vertex*)malloc(sizeof(t_vertex));
 	env->lim = (t_lim*)malloc(sizeof(t_lim));
@@ -53,7 +53,6 @@ static	void	env_init(t_env *env)
 	env->color->r = 200;
 	env->color->g = 100;
 	env->color->b = 50;
-
 }
 
 int				init(t_env *env, char *arg)
@@ -69,9 +68,8 @@ int				init(t_env *env, char *arg)
 		init_douady(env);
 	else if (env->select == 6)
 		init_burning(env);
-	printf("%f\n", env->lim->img_x);
-	printf("%f\n", env->lim->img_y);
-	env->win = mlx_new_window(env->mlx, env->lim->img_x, env->lim->img_y, "fractol");
+	env->win = mlx_new_window(env->mlx, env->lim->img_x,
+			env->lim->img_y, "fractol");
 	env->img = mlx_new_image(env->mlx, env->lim->img_x, env->lim->img_y);
 	env->idata = mlx_get_data_addr(env->img, &(env->ibits), &(env->isizeline),
 			&(env->iendian));

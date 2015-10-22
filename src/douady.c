@@ -2,11 +2,12 @@
 
 static	void	douady_algo2(t_env *env, int xx, int yy)
 {
-	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i)) < 4
-			&& (env->lim->i < env->lim->it_max))
+	while (((env->lim->z_r * env->lim->z_r) + (env->lim->z_i * env->lim->z_i))
+			< 4 && (env->lim->i < env->lim->it_max))
 	{
 		env->lim->tmp = env->lim->z_r;
-		env->lim->z_r = env->lim->z_r * env->lim->z_r - env->lim->z_i * env->lim->z_i + env->lim->c_r;
+		env->lim->z_r = env->lim->z_r * env->lim->z_r
+			- env->lim->z_i * env->lim->z_i + env->lim->c_r;
 		env->lim->z_i = 2 * env->lim->z_i * env->lim->tmp + env->lim->c_i;
 		env->lim->i++;
 	}
@@ -23,7 +24,7 @@ static	void	douady_algo2(t_env *env, int xx, int yy)
 	}
 }
 
-void	douady(t_env *env)
+void			douady(t_env *env)
 {
 	int xx;
 	int yy;
