@@ -36,8 +36,8 @@ void	burning(t_env *env)
 		yy = 0;
 		while (yy < env->lim->img_y)
 		{
-			env->lim->c_r = xx / env->zoom + env->lim->v1->x;
-			env->lim->c_i = yy / env->zoom + env->lim->v1->y;
+			env->lim->c_r = (float)xx / env->lim->img_x * (env->lim->v2->x - env->lim->v1->x) + env->lim->v1->x;
+			env->lim->c_i = (float)yy / env->lim->img_y * (env->lim->v2->y - env->lim->v1->y) + env->lim->v1->y;;
 			env->lim->z_r = 0;
 			env->lim->z_i = 0;
 			env->lim->i = 0;
